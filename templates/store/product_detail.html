@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<style>
+    .single-product-content h3 {
+        font-weight: bold;
+        color: #3b5d50;
+        font-size: 24px; 
+    }
+    .single-product-content p {
+        color: black;
+        font-size: 18px; 
+    }
+    
+    .single-product-content {
+        font-family: 'Arial, sans-serif'; 
+        line-height: 1.6; 
+    }
+    .single-product-pricing {
+        font-size: 20px;
+        color: #ff6600; 
+    }
+    .cart-btn {
+        margin-top: 10px;
+        margin-right: 10px;
+        padding: 10px 20px;
+        background-color: #3b5d50;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .cart-btn:hover {
+        background-color: #3b5d56;
+    }
+</style>
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p></p>
+                    <h1 style="color: #3b5d50;"><b>Product details</b></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<!-- end breadcrumb section -->
+
+<!-- single product -->
+<div class="single-product mt-100 mb-150">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+             <div class="col-md-5">
+                <div class="other product images">
+                     <div class="magnify">
+                        <img src="{{ single_product.images.url}}" alt="product other image" loading="lazy">
+                    </div> 
+                </div>
+            </div> 
+            <div class="col-md-7">
+                <div class="single-product-content">
+                    <h3>{{ single_product.product_name }}</h3>
+                    <p class="single-product-pricing"><span>{{ single_product.category }}</span> ₹{{ single_product.price }}</p>
+                    <p>{{ single_product.description }}</p>
+                    
+                    
+                    <br>
+                    {% if single_product.stock is 0 %}
+                    <h5>Out of Stock</h5>
+                    {% else %}
+                    <a href="add_cart" class="btn btn-primary"> <span class = "text"> Add to cart</span> <i class = "fas fa-shopping-cart"></i> </a>
+                    {% endif %}
+                     {% comment %} <div class="single-product-form">
+                        {% if is_out_of_stock %}
+                        <h5>Out of Stock</h5>
+                        {% else %}
+                        <a id="add-to-cart-btn" href="add_cart" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a> 
+                        <a href="add_cart " class="cart-btn"><i class="fas fa-box"></i> Buy Now</a>
+                        {% if in_wishlist %}
+                        <a href="add_to_wishlist" class="cart-btn"><i class="fas fa-heart"></i> Added to Wishlist</a>
+                        {% else %}
+                        <a href="add_to_wishlist" class="cart-btn"><i class="fas fa-heart"></i> Add to Wishlist</a>                        {% endif %}                       
+                        {% endif %}
+                    </div>  {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end single product -->
+
+
+
+
+
+
+{% endblock content %}
