@@ -28,9 +28,9 @@
           <h3 class="product-title">{{product.product_name}}</h3>
           <strong class="product-price">₹{{product.price}}</strong>
 
-          <span class="icon-cross">
+          {% comment %} <span class="icon-cross">
             <img src="{% static 'images/cross.svg' %}" class="img-fluid" />
-          </span>
+          </span> {% endcomment %}
         </a>
       </div>
       {% endfor %}
