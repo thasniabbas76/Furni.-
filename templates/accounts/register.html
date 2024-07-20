@@ -1,0 +1,113 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="hero">
+  <div class="container">
+    <div class="row justify-content-between">
+      <div class="col-lg-5">
+        <div class="intro-excerpt">
+          <h1>SignUp</h1>
+        </div>
+      </div>
+      <div class="col-lg-7"></div>
+    </div>
+  </div>
+</div>
+
+<div class="breadcrumb-section breadcrumb-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2 text-center">
+        <div class="breadcrumb-text">
+          <h1></h1>
+          <br />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end breadcrumb section -->
+
+<!-- signup form -->
+
+<div class="contact-form-section mt-150 mb-150">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2" style="text-align: center">
+        <div class="form-title text-center">
+          <h2 style="color: black">Create an Account</h2>
+          <p style="color: black">Fill in the details below to sign up.</p>
+        </div>
+        {% include 'includes/alerts.html' %}
+        <div class="contact-form">
+          <form
+            method="POST"
+            id="signup-form"
+            action="{% url 'register' %}"
+            style="width: 100%"  
+          >
+          {% csrf_token %}
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">First Name</label>
+                <div class="col-sm-9">
+                    {{ form.first_name }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Last Name</label>
+                <div class="col-sm-9">
+                    {{ form.last_name }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Email ID</label>
+                <div class="col-sm-9">
+                    {{ form.email }}
+                    
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Phone Number</label>
+                <div class="col-sm-9">
+                    {{ form.phone_number }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Create Password</label>
+                <div class="col-sm-9">
+                    {{ form.password }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Confirm Password</label>
+                <div class="col-sm-9">
+                    {{ form.confirm_password }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12 text-center">
+                    <p class="forgot-signup-links" style="color:black;">
+                        Already have an account? <a href="{% url 'login' %}">Login</a>
+                    </p>
+                </div>
+            </div>
+            <div class="form-group ">
+                <div class="col-sm-12 text-center">
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    {{ form.password.errors }}
+                    {{ form.email.errors }}
+                    {{ form.non_field_errors }}
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end signup form -->
+
+{% endblock content %}

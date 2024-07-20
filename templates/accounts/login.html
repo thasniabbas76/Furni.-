@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="hero">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5">
+                <div class="intro-excerpt">
+                    <h1>Login</h1>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <h1></h1>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb section -->
+
+<!-- login form -->
+{% if request.GET.command == 'verification' %}
+<div class="container mx-auto alert alert-info text-center" role = "alert" style="max-width:480px; margin-bottum:100px;">
+    Thank you for registering with us. we have sent you a verification email to your email address. Please verify it.
+    <br>
+    Already verified? <a href="{% url 'login' %}">Login</a>
+</div>
+{% else %}
+<div class="contact-from-section mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2" style="text-align: center; ">
+                
+                <div class="form-title">
+                    <h2 style="color: black;">Welcome!</h2>
+                    <p style="color: black;">Log in to your account to access our services.</p>
+                </div>
+                
+                {% include 'includes/alerts.html' %}
+                <div class="contact-form">
+                
+                    <form method="POST" id="login-form"  action="{% url 'login' %}" style ="width:100%;">{% csrf_token %}
+                        <div class = "form-group">
+                            <input type="email" class="form-control" placeholder="Email" name="email" id="email" required>
+                        </div>
+                        <div class = "form-group">
+                            <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
+                        </div>
+                        <div class="form-group">
+                            <a href="{% url 'forgotPassword' %}" class = "float-right" style="color: black;">Forgotten Password?</a> | <a href="{% url 'register' %}" style="color: black;">Sign Up</a> 
+                        </div>
+                        {% comment %} <p><input type="submit" style="background-color: #3b5d50; color: white;" value="Login"></p>
+                        <a href="#" class="btn btn-primary"> <span class = "text">Login</span> </a> {% endcomment %}
+                        <div class="form-group ">
+                                <button type="submit" class="btn btn-primary btn-block">LogIn</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end login form -->
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% if messages %}
+<div id="messages" class="container"> 
+{% for message in messages %}
+
+  <div {% if message.tags %} class="alert alert-{{ message.tags }}"
+  {% endif %} role="alert">
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error: {% endif %}
+    {{ message }}
+  </div>
+  {% endfor %} 
+</div>
+{% endif %}
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
