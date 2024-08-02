@@ -119,7 +119,7 @@
           </div>
           {% endcomment %}
           <div class="col-md-6">
-            <a href="{% url 'store' %}" class="btn btn-outline-black btn-sm btn-block">
+            <a href="{% url 'store' %}" class="btn btn-primary btn-lg py-2 btn-block">
               Continue Shopping
             </a>
           </div>
@@ -139,7 +139,7 @@
             />
           </div>
           <div class="col-md-4">
-            <button class="btn btn-black">Apply Coupon</button>
+            <button class="btn btn-primary btn-lg py-2 btn-block">Apply Coupon</button>
           </div>
         </div>
       </div>
@@ -178,12 +178,11 @@
 
             <div class="row">
               <div class="col-md-12">
-                <button
-                  class="btn btn-black btn-lg py-3 btn-block"
-                  onclick="window.location='checkout.html'"
+                <a href="{% url 'checkout' %}"
+                  class="btn btn-primary btn-lg py-2 btn-block"
                 >
                   Proceed To Checkout
-                </button>
+              </a>
               </div>
             </div>
           </div>

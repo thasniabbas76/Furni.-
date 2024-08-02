@@ -7,6 +7,10 @@ from django.contrib import messages,auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from cart.models import Cart, CartItem
+from cart.views import _cart_id
+import requests
+
 #verification email
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -19,32 +23,33 @@ def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            email = form.cleaned_data['email']
-            phone_number = form.cleaned_data['phone_number']
-            password = form.cleaned_data['password']
-            username = email.split("@")[0]
-            user = Account.objects.create_user(first_name=first_name,last_name=last_name,email=email,username=username,password=password)
-            user.phone_number = phone_number
-            user.save()
+            
+                first_name = form.cleaned_data['first_name']
+                last_name = form.cleaned_data['last_name']
+                email = form.cleaned_data['email']
+                phone_number = form.cleaned_data['phone_number']
+                password = form.cleaned_data['password']
+                username = email.split("@")[0]
+                user = Account.objects.create_user(first_name=first_name,last_name=last_name,email=email,username=username,password=password)
+                user.phone_number = phone_number
+                user.save()
 
-            #user avtivation
-            current_site = get_current_site(request)
-            mail_subject = 'Please activate your account.'
-            message = render_to_string('accounts/account_verification_email.html',{
-                'user' : user,
-                'domain' : current_site,
-                'uid' : urlsafe_base64_encode(force_bytes(user.pk)),
-                'token' : default_token_generator.make_token(user),
-            })
-            to_email = email
-            send_email = EmailMessage(mail_subject, message, to=[to_email])
-            send_email.send()
-            # messages.success(request,'Thank you for registering with us. we have sent you a verification email to your email address[thasniabbas76@gmail.com]. Please verify it.')
+                #user avtivation
+                current_site = get_current_site(request)
+                mail_subject = 'Please activate your account.'
+                message = render_to_string('accounts/account_verification_email.html',{
+                    'user' : user,
+                    'domain' : current_site,
+                    'uid' : urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token' : default_token_generator.make_token(user),
+                })
+                to_email = email
+                send_email = EmailMessage(mail_subject, message, to=[to_email])
+                send_email.send()
+                # messages.success(request,'Thank you for registering with us. we have sent you a verification email to your email address[thasniabbas76@gmail.com]. Please verify it.')
 
-            return redirect('/accounts/login/?command=verification&email='+email)
-           
+                return redirect('/accounts/login/?command=verification&email='+email)
+            
     else:
         form = RegistrationForm()
     context = {
@@ -60,12 +65,31 @@ def login(request):
         user = auth.authenticate(email=email,password=password)
 
         if user is not None:
+            try:
+                cart = Cart.objects.get(cart_id=_cart_id(request))
+                is_cart_item_exists= CartItem.objects.filter(cart=cart).exists()
+                if is_cart_item_exists:
+                    cart_item =CartItem.objects.filter(cart=cart)
+                    for item in cart_item:
+                        item.user = user
+                        item.save()
+            except:
+                pass
             auth.login(request, user)
             messages.success(request, "You are now Logged In")
-            return redirect('dashboard')
+            url = request.META.get('HTTP_REFERER')
+            try:
+                query = requests.utils.urlparse(url).query
+                #next=/cart/checkout
+                params = dict(x.split('=') for x in query.split('&'))
+                if 'next' in params:
+                    nextPage = params['next']
+                    return redirect(nextPage)
+            except:
+                return redirect('home')
         else:
             messages.error(request, "Invalid credentials")
-            # return redirect('login')
+            return redirect('login')
     return render(request, 'accounts/login.html')
 
 @login_required(login_url = 'login')

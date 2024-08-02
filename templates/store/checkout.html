@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<style>
+  .compact-form .form-group {
+    margin-bottom: 10px;
+  }
+  .compact-form label {
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  .compact-form .form-control {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+  .compact-form .form-row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .compact-form .form-row .form-group {
+    flex: 1;
+    min-width: 45%;
+  }
+  .compact-form .form-group.col-md-12 {
+    min-width: 100%;
+  }
+  .compact-form textarea.form-control {
+    height: 50px;
+  }
+  .compact-form .form-group.city-state-country-pincode {
+    flex: 1;
+    min-width: 23%;
+    max-width: 23%;
+    padding-right: 10px;
+  }
+  .card {
+    max-width: 800px; /* Increase the width of the card */
+    margin: auto;
+  }
+</style>
+<div class="hero" style="padding-top: 20px; padding-bottom: 20px;">
+  <div class="container">
+    <div class="row justify-content-between">
+      <div class="col-lg-5">
+        <div class="intro-excerpt">
+          <h1></h1>
+        </div>
+      </div>
+      <div class="col-lg-7"></div>
+    </div>
+  </div>
+</div>
+<div class="untree_co-section before-footer-section">
+  <div class="container">
+    <div class="row">
+      <!-- Left side: Delivery Address Form -->
+      <div class="col-md-6">
+        <div class="card compact-form" style="padding: 15px;">
+          <div class="card-body">
+            <h4 class="card-title mb-4 text-center" style="color:black;">Delivery Address</h4>
+            <form action="{% url 'checkout' %}" method="POST">
+              {% csrf_token %}
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <input type="text" name="first_name" placeholder="First Name" class="form-control" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <input type="text" name="last_name" placeholder="Last Name" class="form-control" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <input type="email" name="email" placeholder="Email Address" class="form-control" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <input type="text" name="phone" placeholder="Phone Number" class="form-control" required>
+                </div>
+                <div class="form-group col-md-12">
+                  <input type="text" name="address_line_1" placeholder="Address Line 1" class="form-control" required>
+                </div>
+                <div class="form-group col-md-12">
+                  <input type="text" name="address_line_2" placeholder="Address Line 2" class="form-control">
+                </div>
+                <div class="form-group grouping">
+                  <input type="text" name="city" placeholder="City" class="form-control" required>
+                </div>
+                <div class="form-group grouping">
+                  <input type="text" name="state" placeholder="State" class="form-control" required>
+                </div>
+                <div class="form-group grouping">
+                  <input type="text" name="country" placeholder="Country" class="form-control" required>
+                </div>
+                <div class="form-group grouping">
+                  <input type="text" name="pincode" placeholder="Pincode" class="form-control" required>
+                </div>
+                <div class="form-group col-md-12">
+                  <textarea name="order_note" placeholder="Order note" class="form-control" rows="2"></textarea>
+                </div>
+              </div>
+              <div class="form-group text-center">
+                <button class="btn btn-primary btn-lg py-2 btn-block">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right side: Shopping Cart and Table -->
+      <div class="col-md-6 text-center">
+        <!-- Table of Products -->
+        <table class="table mb-5">
+          <thead>
+            <tr>
+              <th class="product-name">Product</th>
+              <th class="product-price">Price</th>
+              <th class="product-quantity">Quantity</th>
+              <th class="product-total">Total</th> <!-- Add Total column header -->
+            </tr>
+          </thead>
+          <tbody>
+            {% for cart_item in cart_items %}
+            <tr>
+              <td class="product-name">
+                <a href="{{ cart_item.product.get_url }}" class="h5 text-black">{{ cart_item.product.product_name }}</a>
+              </td>
+              <td>₹ {{ cart_item.product.price }}</td>
+              <td>
+                <label for="">{{ cart_item.quantity }}</label>
+              </td>
+              <td>₹ {{ cart_item.sub_total }}</td> <!-- Add sub_total to display total price per item -->
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="4" class="text-center">No items in cart.</td> <!-- Display message if cart is empty -->
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <!-- Shopping Cart Summary -->
+        <div class="pl-5">
+          <div class="row justify-content-center mb-5">
+            <div class="col-md-12 text-center">
+              <h3 class="text-black h4 text-uppercase">Shopping Cart</h3>
+            </div>
+          </div>
+
+          <div class="row justify-content-center mb-5">
+            <div class="col-md-12 text-center">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <span class="text-black">Subtotal</span>
+                </div>
+                <div class="col-md-6 text-right">
+                  <strong class="text-black">₹ {{ total }}</strong>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <span class="text-black">GST</span>
+                </div>
+                <div class="col-md-6 text-right">
+                  <strong class="text-black">₹ {{ tax }}</strong>
+                </div>
+                <div class="col-md-6">
+                  <span class="text-black">Delivery Charge:</span>
+                </div>
+                <div class="col-md-6 text-right">
+                  <strong class="text-black">₹ </strong>
+                </div>
+              </div>
+              <div class="row mb-5">
+                <div class="col-md-6">
+                  <span class="text-black">Grand Total</span>
+                </div>
+                <div class="col-md-6 text-right">
+                  <strong class="text-black">₹ {{ grand_total }}</strong>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <button type="submit" name="submit" class="btn btn-primary btn-lg py-2 btn-block">Proceed to Pay</button>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-12">
+                  <a href="{% url 'store' %}" class="btn btn-primary btn-lg py-2 btn-block">Continue Shopping</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+{% endblock content %}
