@@ -58,7 +58,7 @@
         <div class="card compact-form" style="padding: 15px;">
           <div class="card-body">
             <h4 class="card-title mb-4 text-center" style="color:black;">Delivery Address</h4>
-            <form action="{% url 'checkout' %}" method="POST">
+            <form action="{% url 'place_order' %}" method="POST">
               {% csrf_token %}
               <div class="form-row">
                 <div class="form-group col-md-6">
