@@ -62,7 +62,7 @@
                     >{{ cart_item.product.product_name }}</a
                   >
                 </td>
-                <td>₹ {{ cart_item.product.price }}</td>
+                <td>$ {{ cart_item.product.price }}</td>
                 <td>
                   <div
                     class="input-group mb-3 d-flex align-items-center quantity-container"
@@ -94,7 +94,7 @@
                     </div>
                   </div>
                 </td>
-                <td>₹ {{ cart_item.sub_total }}</td>
+                <td>$ {{ cart_item.sub_total }}</td>
                 <td>
                   <a
                     href="{% url 'remove_cart_item' cart_item.product.id %}"
@@ -156,7 +156,7 @@
                 <span class="text-black">Subtotal</span>
               </div>
               <div class="col-md-6 text-right">
-                <strong class="text-black">₹ {{total}}</strong>
+                <strong class="text-black">$ {{total}}</strong>
               </div>
             </div>
             <div class="row mb-3">
@@ -164,7 +164,7 @@
                 <span class="text-black">GST</span>
               </div>
               <div class="col-md-6 text-right">
-                <strong class="text-black">₹ {{tax}}</strong>
+                <strong class="text-black">$ {{tax}}</strong>
               </div>
             </div>
             <div class="row mb-5">
@@ -172,7 +172,7 @@
                 <span class="text-black">Grand Total</span>
               </div>
               <div class="col-md-6 text-right">
-                <strong class="text-black">₹ {{grand_total}}</strong>
+                <strong class="text-black">$ {{grand_total}}</strong>
               </div>
             </div>
 

@@ -16,11 +16,16 @@
 		<link href="{% static 'css/tiny-slider.css' %}" rel="stylesheet">
 		<link href="{% static 'css/style.css' %}" rel="stylesheet">
 		<title>Furni. </title>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+		<script src="{% static 'js/tiny-slider.js' %}"></script>
+		<script src="{% static 'js/custom.js' %}"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AdBbqZF0RwxRCgCLvF09dr9nlUsOqURnoGtV5hoCQyxCovGzv5G9OJ0dl3Ih48MG73jEVY80dCO3X2xd&currency=USD"></script> 
+    
 	</head>
     <body>
             <!-- Start Header/Navigation -->
         {% include "includes/navbar.html" %}
         {% block content %}
-
+       
         {% endblock content %}
         {% include "includes/footer.html" %}
