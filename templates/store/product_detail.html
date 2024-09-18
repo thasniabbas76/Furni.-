@@ -79,10 +79,6 @@
       <div class="col-md-7">
         <div class="single-product-content">
           <h3>{{ single_product.product_name }}</h3>
-          <p class="single-product-pricing">
-            <span>{{ single_product.category }}</span> ${{
-            single_product.price}}
-          </p>
           <div class="rating-star">
             <span>
               <i
@@ -108,6 +104,11 @@
               <span>{{single_product.countReview}} reviews</span>
             </span>
           </div>
+          <p class="single-product-pricing">
+            <span>{{ single_product.category }}</span><br>
+            ${{ single_product.price}}
+          </p>
+          
           <p>{{ single_product.description }}</p>
 
           <br />
