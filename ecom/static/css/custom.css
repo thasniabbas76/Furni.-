@@ -38,3 +38,8 @@ label:hover ~input:checked ~label{
 .rating-star i{
     color: #ffb503 !important;
   }
+/* Custom styles for active sidebar items */
+.list-group-item.active {
+    background-color: #3b5d50 ;
+    border-color: #3b5d50;
+}
