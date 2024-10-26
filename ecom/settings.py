@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default = True, cast=bool) #True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['furni-env.eba-hcvdbgmw.ap-south-1.elasticbeanstalk.com']
 
 
 # Application definition
@@ -98,7 +98,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': '12345',
         'HOST': 'localhost',
-        'PORT': '',          
+        'PORT': '5432',          
     }   
 }
 
