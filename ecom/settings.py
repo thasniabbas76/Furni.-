@@ -28,8 +28,6 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default = True, cast=bool) #True
 
 ALLOWED_HOSTS = ['ec2-65-0-199-78.ap-south-1.compute.amazonaws.com']
-print(f"Loaded SECRET_KEY: {config('SECRET_KEY', default=None)}")
-
 
 # Application definition
 
