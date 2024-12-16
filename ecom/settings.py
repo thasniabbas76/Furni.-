@@ -27,7 +27,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default = True, cast=bool) #True
 
-ALLOWED_HOSTS = ['ecom-env.eba-epvvbktd.ap-south-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['ec2-65-0-199-78.ap-south-1.compute.amazonaws.com']
+print(f"Loaded SECRET_KEY: {config('SECRET_KEY', default=None)}")
 
 
 # Application definition
@@ -94,11 +95,11 @@ AUTH_USER_MODEL = 'accounts.ACCOUNT'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ecom',
-        'USER': 'postgres',
-        'PASSWORD': '12345',
-        'HOST': 'localhost',
-        'PORT': '',          
+        'NAME': 'ecomdb',
+        'USER': 'ecomsuperuser',
+        'PASSWORD': 'ecomsuperuser',
+        'HOST': 'ecomdb.cpqcyyy0cedh.ap-south-1.rds.amazonaws.com',
+        'PORT': '5432',          
     }   
 }
 
@@ -165,3 +166,13 @@ EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+
+AWS_ACCESS_KEY_ID = 'AKIAQ4NSBLIISFBBLBXU'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'ecomfurni'
+AWS_S3_SIGNATURE_NAME = 's3v4',
+AWS_S3_REGION_NAME = 'ap-south-1'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL =  None
+AWS_S3_VERIFY = True
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
