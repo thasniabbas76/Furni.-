@@ -93,11 +93,11 @@ AUTH_USER_MODEL = 'accounts.ACCOUNT'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ecomdb',
-        'USER': 'ecomsuperuser',
-        'PASSWORD': 'ecomsuperuser',
-        'HOST': 'ecomdb.cpqcyyy0cedh.ap-south-1.rds.amazonaws.com',
-        'PORT': '5432',          
+        'NAME': config('RDS_DB_NAME'),
+        'USER': config('RDS_USER'),
+        'PASSWORD': config('RDS_PASSWORD'),
+        'HOST': config('RDS_HOST'),
+        'PORT': config('RDS_PORT',default='5432'),          
     }   
 }
 
