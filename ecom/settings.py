@@ -105,7 +105,7 @@ DATABASES = {
         'NAME': 'ecomdb_pt7y',
         'USER': 'ecomdb_pt7y_user',
         'PASSWORD': 'bk0UvWnJ0Kv29oEeeAjPuRjTSlGKIntR',
-        'HOST': 'dpg-cud6jf2n91rc73epqpe0-a',
+        'HOST': 'dpg-cud6jf2n91rc73epqpe0-a.oregon-postgres.render.com',
         'PORT': '5432',
     }
 }
