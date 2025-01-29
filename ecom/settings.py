@@ -9,11 +9,11 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-import os
+
 from pathlib import Path
 from decouple import config
 from django.contrib.messages import constants as messages
-# import dj_database_url
+import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -93,22 +93,22 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 AUTH_USER_MODEL = 'accounts.ACCOUNT'
 
 
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default='postgresql://contactmanagerthasni_user:JVYzdMxbZR6ogzKcFtZflU1Te7CWrP53@dpg-cuatmc0gph6c73a22ok0-a.oregon-postgres.render.com/contactmanagerthasni'
-#     )
-# }
-
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        'NAME': os.getenv('DATABASE_NAME', 'contactmanagerthasni'),
-        'USER': os.getenv('DATABASE_USER', 'contactmanagerthasni_user'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'JVYzdMxbZR6ogzKcFtZflU1Te7CWrP53'),
-        'HOST': os.getenv('DATABASE_HOST', 'dpg-cuatmc0gph6c73a22ok0-a.oregon-postgres.render.com'),
-        'PORT': os.getenv('DATABASE_PORT', '5432'),
-    }
+    'default': dj_database_url.config(
+        default='postgresql://contactmanagerthasni_user:JVYzdMxbZR6ogzKcFtZflU1Te7CWrP53@dpg-cuatmc0gph6c73a22ok0-a.oregon-postgres.render.com/contactmanagerthasni'
+    )
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         'NAME': 'contactmanagerthasni',
+#         'USER': 'contactmanagerthasni_user',
+#         'PASSWORD': 'JVYzdMxbZR6ogzKcFtZflU1Te7CWrP53',
+#         'HOST': 'dpg-cuatmc0gph6c73a22ok0-a.oregon-postgres.render.com',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
