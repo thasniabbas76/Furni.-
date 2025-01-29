@@ -95,17 +95,17 @@ AUTH_USER_MODEL = 'accounts.ACCOUNT'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://contactmanagerthasni_user:JVYzdMxbZR6ogzKcFtZflU1Te7CWrP53@dpg-cuatmc0gph6c73a22ok0-a.oregon-postgres.render.com/contactmanagerthasni'
+        default='postgresql://ecomdb_pt7y_user:bk0UvWnJ0Kv29oEeeAjPuRjTSlGKIntR@dpg-cud6jf2n91rc73epqpe0-a.oregon-postgres.render.com/ecomdb_pt7y'
     )
 }
 
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.postgresql",
-#         'NAME': 'contactmanagerthasni',
-#         'USER': 'contactmanagerthasni_user',
-#         'PASSWORD': 'JVYzdMxbZR6ogzKcFtZflU1Te7CWrP53',
-#         'HOST': 'dpg-cuatmc0gph6c73a22ok0-a.oregon-postgres.render.com',
+#         'NAME': 'ecomdb_pt7y',
+#         'USER': 'ecomdb_pt7y_user',
+#         'PASSWORD': 'bk0UvWnJ0Kv29oEeeAjPuRjTSlGKIntR',
+#         'HOST': 'dpg-cud6jf2n91rc73epqpe0-a',
 #         'PORT': '5432',
 #     }
 # }
