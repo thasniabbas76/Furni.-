@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from decouple import config
 from django.contrib.messages import constants as messages
+import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -92,19 +93,19 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 AUTH_USER_MODEL = 'accounts.ACCOUNT'
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default='postgresql://contactmanagerthasni_user:JVYzdMxbZR6ogzKcFtZflU1Te7CWrP53@dpg-cuatmc0gph6c73a22ok0-a.oregon-postgres.render.com/contactmanagerthasni'
+#     )
+# }
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        'NAME': 'ecom',
-        'USER': 'postgres',
-        'PASSWORD': '12345',
-        'HOST': 'localhost',  # Corrected here
+        'NAME': 'contactmanagerthasni',
+        'USER': 'contactmanagerthasni_user',
+        'PASSWORD': 'JVYzdMxbZR6ogzKcFtZflU1Te7CWrP53',
+        'HOST': 'dpg-cuatmc0gph6c73a22ok0-a.oregon-postgres.render.com',
         'PORT': '5432',
     }
 }
