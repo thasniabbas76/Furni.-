@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from decouple import config
 from django.contrib.messages import constants as messages
-import dj_database_url
+# import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -93,22 +93,22 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 AUTH_USER_MODEL = 'accounts.ACCOUNT'
 
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://ecomdb_pt7y_user:bk0UvWnJ0Kv29oEeeAjPuRjTSlGKIntR@dpg-cud6jf2n91rc73epqpe0-a.oregon-postgres.render.com/ecomdb_pt7y'
-    )
-}
-
 # DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         'NAME': 'ecomdb_pt7y',
-#         'USER': 'ecomdb_pt7y_user',
-#         'PASSWORD': 'bk0UvWnJ0Kv29oEeeAjPuRjTSlGKIntR',
-#         'HOST': 'dpg-cud6jf2n91rc73epqpe0-a',
-#         'PORT': '5432',
-#     }
+#     'default': dj_database_url.config(
+#         default='postgresql://ecomdb_pt7y_user:bk0UvWnJ0Kv29oEeeAjPuRjTSlGKIntR@dpg-cud6jf2n91rc73epqpe0-a.oregon-postgres.render.com/ecomdb_pt7y'
+#     )
 # }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        'NAME': 'ecomdb_pt7y',
+        'USER': 'ecomdb_pt7y_user',
+        'PASSWORD': 'bk0UvWnJ0Kv29oEeeAjPuRjTSlGKIntR',
+        'HOST': 'dpg-cud6jf2n91rc73epqpe0-a',
+        'PORT': '5432',
+    }
+}
 
 
 # Password validation
