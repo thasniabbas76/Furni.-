@@ -5,7 +5,7 @@ from accounts.models import Account
 from django.db.models import Avg, Count
 # Create your models here.
 class Product(models.Model):
-    product_name = models.CharField(max_length=50, unique='True')
+    product_name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=250,unique=True)
     description = models.TextField(max_length=500,blank=True)
     price = models.IntegerField()
