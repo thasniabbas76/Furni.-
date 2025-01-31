@@ -29,7 +29,10 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default = True, cast=bool) #True
 
-ALLOWED_HOSTS = ['localhost','furni-74a5.onrender.com','0.0.0.0']
+ALLOWED_HOSTS = ['localhost','furni-74a5.onrender.com','0.0.0.0','127.0.0.1']
+
+#Session Management
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # ✅ Ensures sessions work
 
 # Application definition
 

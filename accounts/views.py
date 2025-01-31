@@ -4,9 +4,9 @@ from django.shortcuts import render,redirect,get_object_or_404
 from .forms import RegistrationForm, UserForm, UserProfileForm
 from .models import Account, UserProfile
 from django.contrib import messages,auth
-from django.contrib.auth import authenticate
+# from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from cart.models import Cart, CartItem
 from cart.views import _cart_id
 import requests
@@ -75,7 +75,7 @@ def login(request):
                     for item in cart_item:
                         item.user = user
                         item.save()
-            except:
+            except Cart.DoesNotExist:
                 pass
             auth.login(request, user)
             messages.success(request, "You are now Logged In")
@@ -118,7 +118,7 @@ def activate(request, uidb64,token):
 def dashboard(request):
     orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id,is_ordered = True)
     orders_count = orders.count()
-    userprofile = UserProfile.objects.get(user_id=request.user.id)
+    userprofile = UserProfile.objects.filter(user_id=request.user.id).first()
     context = {
         'orders_count' : orders_count,
         'userprofile' : userprofile,
@@ -203,7 +203,7 @@ def edit_profile(request):
     context = {
         'user_form' : user_form,
         'profile_form' : profile_form,
-        'userprofile' : userprofile,
+        'userprofile' : userprofile if userprofile.profile_picture else None,
     }
     return render(request, 'accounts/edit_profile.html', context)
 @login_required(login_url ='login')

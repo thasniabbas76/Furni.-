@@ -4,6 +4,8 @@ from .models import Cart, CartItem
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from orders.models import Order
 # Create your views here.
 def _cart_id(request):
     cart = request.session.session_key
@@ -132,3 +134,15 @@ def checkout(request, total=0,quantity=0,cart_items=None):
         'grand_total': grand_total,
     }
     return render(request, 'store/checkout.html',context)
+
+def proceed_to_pay(request):
+    # Assuming the user is logged in and has an order
+    user = request.user
+    order = Order.objects.filter(user=user, is_ordered=False).first()
+
+    if not order or not order.delivery_address:
+        messages.error(request, "Please fill your delivery address before proceeding to payment.")
+        return redirect("checkout")  # Redirect back to checkout page
+
+    # Proceed to payment if address exists
+    return redirect("payments")  # Replace with your actual payment URL

@@ -175,12 +175,22 @@
                   <strong class="text-black">$ {{ grand_total }}</strong>
                 </div>
               </div>
-
+              <form action="{% url 'proceed_to_pay' %}" method="POST">
+                {% csrf_token %}
               <div class="row">
                 <div class="col-md-12">
                   <button type="submit" name="submit" class="btn btn-primary btn-lg py-2 btn-block">Proceed to Pay</button>
                 </div>
               </div>
+              </form>
+              <br>
+              {% if messages %}
+                    {% for message in messages %}
+                      <div class="alert alert-danger">
+                        {{ message }}
+                      </div>
+                    {% endfor %}
+              {% endif %}
               <br>
               <div class="row">
                 <div class="col-md-12">
