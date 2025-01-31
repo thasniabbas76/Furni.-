@@ -106,13 +106,11 @@ STORAGES = {
 WSGI_APPLICATION = 'ecom.wsgi.application'
 
 AUTH_USER_MODEL = 'accounts.ACCOUNT'
-
+import dj_database_url
 import os
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'URL': os.getenv('DATABASE_URL')
-    }
+        'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+
 }
 # DATABASES = {
 #     "default": {
