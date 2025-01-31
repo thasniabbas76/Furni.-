@@ -9,23 +9,23 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 from decouple import config
 from django.contrib.messages import constants as messages
 # import dj_database_url
 #cloudinary details
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+# import cloudinary
+# import cloudinary.uploader
+# import cloudinary.api
 
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'drg5ceuxt',
-    'API_KEY': '983247215388274',
-    'API_SECRET': 'Y3Ixk1dByaRmj9DjB0MUqaAVt5w'
-}
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'drg5ceuxt',
+#     'API_KEY': '983247215388274',
+#     'API_SECRET': 'Y3Ixk1dByaRmj9DjB0MUqaAVt5w'
+# }
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -61,7 +61,7 @@ INSTALLED_APPS = [
     'store',
     'cart',
     'orders',
-    'cloudinary', 'cloudinary_storage'
+    # 'cloudinary', 'cloudinary_storage'
 ]
 
 MIDDLEWARE = [
@@ -106,22 +106,26 @@ STORAGES = {
 WSGI_APPLICATION = 'ecom.wsgi.application'
 
 AUTH_USER_MODEL = 'accounts.ACCOUNT'
-import dj_database_url
-import os
-DATABASES = {
-        'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 
-}
+# from dotenv import load_dotenv
+# import dj_database_url
+# load_dotenv()
+# print(os.getenv('DATABASE_URL'))
 # DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         'NAME': os.getenv('DB_NAME'),
-#         'USER': os.getenv('DB_USER'),
-#         'PASSWORD': os.getenv('DB_PASSWORD'),
-#         'HOST': os.getenv('DB_HOST'),
-#         'PORT': os.getenv('DB_PORT'),
-#     }
+#         'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+
 # }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
+    }
+}
 
 
 # Password validation
