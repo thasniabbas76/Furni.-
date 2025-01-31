@@ -14,7 +14,18 @@ from pathlib import Path
 from decouple import config
 from django.contrib.messages import constants as messages
 # import dj_database_url
+#cloudinary details
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'drg5ceuxt',
+    'API_KEY': '983247215388274',
+    'API_SECRET': 'Y3Ixk1dByaRmj9DjB0MUqaAVt5w'
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -50,6 +61,7 @@ INSTALLED_APPS = [
     'store',
     'cart',
     'orders',
+    'cloudinary', 'cloudinary_storage'
 ]
 
 MIDDLEWARE = [
@@ -95,23 +107,23 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 
 AUTH_USER_MODEL = 'accounts.ACCOUNT'
 
-
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default='postgresql://ecomdb_pt7y_user:bk0UvWnJ0Kv29oEeeAjPuRjTSlGKIntR@dpg-cud6jf2n91rc73epqpe0-a.oregon-postgres.render.com/ecomdb_pt7y'
-#     )
-# }
-
+import os
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        'NAME': 'ecomdb_pt7y',
-        'USER': 'ecomdb_pt7y_user',
-        'PASSWORD': 'bk0UvWnJ0Kv29oEeeAjPuRjTSlGKIntR',
-        'HOST': 'dpg-cud6jf2n91rc73epqpe0-a.oregon-postgres.render.com',
-        'PORT': '5432',
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'URL': os.getenv('DATABASE_URL')
     }
 }
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         'NAME': os.getenv('DB_NAME'),
+#         'USER': os.getenv('DB_USER'),
+#         'PASSWORD': os.getenv('DB_PASSWORD'),
+#         'HOST': os.getenv('DB_HOST'),
+#         'PORT': os.getenv('DB_PORT'),
+#     }
+# }
 
 
 # Password validation
