@@ -191,7 +191,7 @@ def my_orders(request):
     return render(request, 'accounts/my_orders.html',context)
 @login_required(login_url = 'login')
 def edit_profile(request):
-    userprofile = get_object_or_404(UserProfile, user=request.user)
+    userprofile, created = UserProfile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
         user_form = UserForm(request.POST,instance=request.user) #instance is used to update/edit the profile
         profile_form = UserProfileForm(request.POST,request.FILES,instance=userprofile)
