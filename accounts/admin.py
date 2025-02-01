@@ -20,6 +20,6 @@ class UserProfileAdmin(admin.ModelAdmin):
         return "No Image" #fallback if no profile picture is uploaded
     thumbnail.short_description = "Profile Picture"
     list_display = ('thumbnail','user','city','state','country')
-    list_display_links = ('user')
+    list_display_links = ('user',)
 admin.site.register(Account, AccountAdmin)
 admin.site.register(UserProfile,UserProfileAdmin)
